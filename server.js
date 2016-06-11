@@ -5,10 +5,12 @@ var config = require('./config.js'),
     Error404Page = require('./lib/Error404Page.js'),
     Log = require('./lib/Log.js')
 
-var sendingFiles = Object.create(null)
+var sendingFiles = Object.create(null),
+    receivingFiles = Object.create(null)
 
 var pages = Object.create(null)
 pages['/'] = require('./lib/IndexPage.js')
+pages['/frontNode/receive'] = require('./lib/ReceivePage.js')(sendingFiles, receivingFiles)
 pages['/sessionNode/send'] = require('./lib/SendPage.js')(sendingFiles)
 
 http.createServer((req, res) => {
