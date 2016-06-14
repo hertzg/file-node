@@ -10,8 +10,9 @@ var sendingFiles = Object.create(null),
 
 var pages = Object.create(null)
 pages['/'] = require('./lib/IndexPage.js')
-pages['/frontNode/receive'] = require('./lib/ReceivePage.js')(sendingFiles, receivingFiles)
-pages['/sessionNode/send'] = require('./lib/SendPage.js')(sendingFiles)
+pages['/frontNode/feed'] = require('./lib/Page/Feed.js')(receivingFiles)
+pages['/frontNode/receive'] = require('./lib/Page/Receive.js')(sendingFiles, receivingFiles)
+pages['/sessionNode/send'] = require('./lib/Page/Send.js')(sendingFiles)
 
 http.createServer((req, res) => {
     Log.http(req.method + ' ' + req.url)
